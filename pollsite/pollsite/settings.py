@@ -11,16 +11,41 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+ENV_FILE = BASE_DIR / ".env"
+
+if Path(ENV_FILE).exists():
+    env.read_env(str(ENV_FILE))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wwc#no30@zu#t3*qqryud8y!x1yv7ar!&1_b3&j(qit3z$1_lc'
+DEBUG = env.bool("DJANGO_DEBUG")
+SECRET_KEY = env.str("DJANGO_SECRET_KEY")
+
+DB_NAME = env.str("DB_NAME")
+DB_USER = env.str("DB_USER")
+DB_PASSWORD = env.str("DB_PASSWORD")
+DB_HOST = env.str("DB_HOST")
+
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+    }
+}
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,17 +93,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pollsite.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
