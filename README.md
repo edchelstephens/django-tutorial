@@ -5,3 +5,6 @@
 * Create virtual environment
 * Install requirements
     `pip install -r requirements/local.txt`
+* Copy env.sample.mac_or_linux to .env
+    `cp env.sample.mac_or_linux .env`
+
