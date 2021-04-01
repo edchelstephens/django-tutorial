@@ -32,6 +32,12 @@ DB_NAME = env.str("DB_NAME")
 DB_USER = env.str("DB_USER")
 DB_PASSWORD = env.str("DB_PASSWORD")
 DB_HOST = env.str("DB_HOST")
+ENV = env.str("ENV")
+LOCAL_MACHINE_IP = env.str("LOCAL_MACHINE_IP")
+
+IS_LOCAL_ENV = ENV == "localhost"
+IS_STAGING_ENV = ENV == "staging"
+IS_PRODUCTION_ENV = ENV == "production"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -51,6 +57,9 @@ DATABASES = {
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+if IS_LOCAL_ENV:
+    ALLOWED_HOSTS += ["0.0.0.0", LOCAL_MACHINE_IP]
 
 
 # Application definition
