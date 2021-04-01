@@ -59,7 +59,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 if IS_LOCAL_ENV:
-    ALLOWED_HOSTS += ["0.0.0.0", LOCAL_MACHINE_IP]
+    ALLOWED_HOSTS += ["0.0.0.0", "127.0.0.1", LOCAL_MACHINE_INET_ADDR]
 
 
 # Application definition
