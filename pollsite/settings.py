@@ -33,7 +33,7 @@ DB_USER = env.str("DB_USER")
 DB_PASSWORD = env.str("DB_PASSWORD")
 DB_HOST = env.str("DB_HOST")
 ENV = env.str("ENV")
-LOCAL_MACHINE_IP = env.str("LOCAL_MACHINE_IP")
+LOCAL_MACHINE_INET_ADDR = env.str("LOCAL_MACHINE_INET_ADDR")
 
 IS_LOCAL_ENV = ENV == "localhost"
 IS_STAGING_ENV = ENV == "staging"
