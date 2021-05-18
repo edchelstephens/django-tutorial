@@ -9,3 +9,7 @@
 * Copy env.sample.mac_or_linux to .env and setup database and environment settings
     `cp env.sample.mac_or_linux .env`
 
+
+## Progress
+* Last stop:
+    https://docs.djangoproject.com/en/3.1/intro/tutorial01/#path-argument-route
