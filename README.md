@@ -12,4 +12,4 @@
 
 ## Progress
 * Last stop:
-    https://docs.djangoproject.com/en/3.1/intro/tutorial01/#path-argument-route
+    https://docs.djangoproject.com/en/3.1/intro/tutorial02/#database-setup
