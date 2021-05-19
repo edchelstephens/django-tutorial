@@ -12,4 +12,4 @@
 
 ## Progress
 * Last stop:
-    https://docs.djangoproject.com/en/3.1/intro/tutorial02/#database-setup
+    https://docs.djangoproject.com/en/3.1/intro/tutorial02/#activating-models
