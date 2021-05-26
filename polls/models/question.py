@@ -4,7 +4,7 @@ from polls.models.abstract import NamedModel
 
 class Question(NamedModel):
     """The poll question model."""
-    pub_date = models.DateTimeField("date published")
+    date_published = models.DateTimeField("date published")
 
 class Choice(NamedModel):
     """Poll question answer choices model with votes."""
