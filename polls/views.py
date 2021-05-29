@@ -7,14 +7,11 @@ from polls.models import Question
 def index(request):
     latest_polls = Question.objects.order_by("-date_published")[:5]
         
-    template = loader.get_template("polls/index.html")
-
     context = {
         "latest_polls": latest_polls
     }
 
-    return HttpResponse(template.render(context, request))
-
+    return render(request, "polls/index.html", context)
 
 def detail(request, question_id):
     return HttpResponse("You're looking at question {}".format(question_id))
