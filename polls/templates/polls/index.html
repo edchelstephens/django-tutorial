@@ -11,7 +11,7 @@
     <ul>
         {% for question in latest_polls %}
         <li>
-            <a href="{% url 'detail' question.id %}">{{ question.name }}</a>
+            <a href="{% url 'polls:detail' question.id %}">{{ question.name }}</a>
         </li>
         {% endfor %}
     </ul>
