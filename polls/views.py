@@ -1,29 +1,31 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views import generic
 
 from polls.models import Question, Choice
 
 from utils.debug import pprint_data
 
-def index(request):
-    latest_polls = Question.objects.order_by("-date_published")[:5]
-        
-    context = {
-        "latest_polls": latest_polls
-    }
+class IndexView(generic.ListView):
+    template_name = "polls/index.html"
+    context_object_name = "latest_polls"
 
-    return render(request, "polls/index.html", context)
+    def get_queryset(self):
+        """Get the top 5 latest polls."""
+        return Question.objects.order_by("-date_published")[:5]
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, id=question_id)
-    return render(request, "polls/detail.html", {"question": question})
 
-def results(request, question_id):
-    question = get_object_or_404(Question, id=question_id)
-    return render(request, "polls/results.html", 
-        {"question": question}
-    )
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = "polls/detail.html"
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = "polls/results.html"
+    
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, id=question_id)
