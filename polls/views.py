@@ -1,11 +1,12 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from pprint import pprint
+from django.http import HttpResponse, HttpResponseRedirect, response
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 
 from polls.models import Question, Choice
 
-from utils.debug import pprint_data
+from utils.debug import debug_exception, pprint_data
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
@@ -26,7 +27,6 @@ class ResultsView(generic.DetailView):
     template_name = "polls/results.html"
     
 
-
 def vote(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     try:
@@ -42,3 +42,63 @@ def vote(request, question_id):
         choice.save()
 
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+class APIView(generic.View):
+    """Sample API View to handle request passed arguments from another view."""
+    def post(self, request, from_api=False, data=None, *args, **kwargs):
+        try:
+            pprint_data(request, "in APIView request", bg="blue")
+            pprint_data(from_api, "from api", bg="blue")
+            pprint_data(data, "passed data", bg="blue")
+            response = {
+                "data": data
+            }
+
+            if from_api:
+                return response
+            else:
+                return HttpResponse(response)
+
+        except Exception as exc:
+            debug_exception(exc)
+            raise exc
+
+class VoteView(generic.View):
+    """Class based view for voting"""
+    
+    def post(self, request, question_id, *args, **kwargs):
+        try:
+
+            pprint_data(request, "In VoteView class based view")
+            data = {"question_id": question_id}
+
+            api_view = APIView.as_view()
+            response = api_view(request, from_api=True, data=data)
+
+            pprint_data(response, "response from APIView.as_view() then passed with request and other arguments")
+
+            return HttpResponse(response, content_type="application/json")
+        except Exception as exc:
+            debug_exception(exc)
+            return HttpResponse("Error")
+
+def vote_new(request, question_id):
+    """function based voting view"""
+    try:
+        pprint_data(request, "In vote_new function based view")
+
+        data = {
+            "question_id": question_id
+        }
+
+        api_view = APIView.as_view()
+        response = api_view(request)
+        pprint_data(response, "Response from api_view")
+
+        return HttpResponse(response, content_type="application/json")
+
+
+    except Exception as exc:
+        debug_exception(exc)
+        return HttpResponse("Error", status=400)
