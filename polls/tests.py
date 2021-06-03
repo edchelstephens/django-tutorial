@@ -15,3 +15,8 @@ class QuestionModelTests(TestCase):
         future_question = Question(date_published=future_date)
         
         self.assertIs(future_question.was_published_recently(), False)
+
+    def test_repr(self):
+        """test Question repr method."""
+        question = Question.objects.create(name="test", date_published=timezone.now())
+        self.assertEqual(repr(question), "Question(id={}, name={})".format(question.id, question.name))
