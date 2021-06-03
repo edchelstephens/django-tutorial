@@ -9,6 +9,9 @@ class Question(NamedModel):
     """The poll question model."""
     date_published = models.DateTimeField("date published")
 
+    def __str__(self):
+        return self.name
+
     def __repr__(self):
         return "Question(id={}, name={})".format(
             self.id,
