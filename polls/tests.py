@@ -18,5 +18,6 @@ class QuestionModelTests(TestCase):
 
     def test_repr(self):
         """test Question repr method."""
-        question = Question.objects.create(name="test", date_published=timezone.now())
-        self.assertEqual(repr(question), "Question(id={}, name={})".format(question.id, question.name))
+        name = "test"
+        question = Question.objects.create(name=name, date_published=timezone.now())
+        self.assertEqual(repr(question), "Question(id={}, name={})".format(question.id, name))
