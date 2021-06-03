@@ -17,7 +17,9 @@ class Question(NamedModel):
 
     def was_published_recently(self):
         """Check if question was published recently"""
-        return self.date_published >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        recent = now - datetime.timedelta(days=1)
+        return recent <= self.date_published <= now
 
 class Choice(NamedModel):
     """Poll question answer choices model with votes."""
