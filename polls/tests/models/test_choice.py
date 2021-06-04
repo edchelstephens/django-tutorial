@@ -22,13 +22,15 @@ class ChoiceModelTestCase(TestCase):
         choice_name = "test_choice"
         choice = Choice.objects.create(name=choice_name, question=question)
 
-        self.assertEqual(repr(choice), "Choice(name={}, question=Question(id={}, name={}), votes={}".format(
+        self.assertEqual(repr(choice), "Choice(id={}, name={}, question=Question(id={}, name={}), votes={})".format(
+            choice.id,
             choice_name,
             question.id,
             question_name,
             choice.votes
         ))
-        self.assertEqual(choice.__repr__(), "Choice(name={}, question=Question(id={}, name={}), votes={}".format(
+        self.assertEqual(choice.__repr__(), "Choice(id={}, name={}, question=Question(id={}, name={}), votes={})".format(
+            choice.id,
             choice_name,
             question.id,
             question_name,
