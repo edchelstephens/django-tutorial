@@ -16,7 +16,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Get the top 5 latest polls.*
         
-        Not including questions that are set to be
+        *Not including questions that are set to be
         published in the future.
         """
         return Question.objects.filter(
