@@ -14,7 +14,7 @@ def create_question(name, days):
     return Question.objects.create(name=name, date_published=date_published)
 
 class QuestionIndexViewTests(TestCase):
-    """Test case for question index view."""
+    """Test suite for question index view."""
     url = reverse("polls:index")
     
     def test_no_questions(self):
@@ -83,3 +83,24 @@ class QuestionIndexViewTests(TestCase):
             "Question(id={}, name={})".format(q4.id, q4.name),
             "Question(id={}, name={})".format(q5.id, q5.name),
         ])
+
+
+class QuestionDetailViewTests(TestCase):
+    """Question detail view test suite."""
+
+    def test_future_questions(self):
+        """Detail view of a question with a date_published in the future returns a 404"""
+        future_question = create_question(name="Future question.", days=5)
+        url = reverse("polls:detail", args=(future_question.id,))
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 404)
+
+
+    def test_past_question(self):
+        """Detail view of a past question already published shows the questions name."""
+        past_question = create_question(name="Past question", days=-5)
+        url = reverse("polls:detail", args=(past_question.id,))
+        response = self.client.get(url)
+
+        self.assertContains(response, past_question.name)
