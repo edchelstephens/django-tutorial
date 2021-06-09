@@ -28,6 +28,13 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
 
+    def get_queryset(self):
+        """Only show questions that are already published.*
+        
+        *Hide futue questions, i.e futures with date_published > timezone.now()
+        """
+        return Question.objects.filter(date_published__lte=timezone.now())
+
 
 class ResultsView(generic.DetailView):
     model = Question
