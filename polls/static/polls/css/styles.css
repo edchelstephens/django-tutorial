@@ -3,5 +3,10 @@ body{
 }
 
 li a{
-    color: green;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.white{
+    color: #ffffff;
 }
