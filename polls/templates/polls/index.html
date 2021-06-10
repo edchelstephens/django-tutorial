@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll Site</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/styles.css' %}">
+
 </head>
 <body>
     {% if latest_polls %}
+    <h1 class="white">Latest Polls</h1>
     <ul>
         {% for question in latest_polls %}
         <li>
