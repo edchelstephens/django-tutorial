@@ -10,6 +10,7 @@
 
 </head>
 <body>
+    <img src="{% static 'assets/images/ed.jpg' %}" width="10%">
     {% if latest_polls %}
     <h1 class="white">Latest Polls</h1>
     <ul>
@@ -21,6 +22,8 @@
     </ul>
 {% else %}
     <p>No polls are available</p>
+
+    
 
 {% endif %}
     
