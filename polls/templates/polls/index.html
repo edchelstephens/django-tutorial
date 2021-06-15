@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll Site</title>
     <link rel="stylesheet" type="text/css" href="{% static 'polls/css/styles.css' %}">
+    <link rel="icon" href="{% static 'polls/images/favicon.ico' %}">
 
 </head>
 <body>
-    <img src="{% static 'assets/images/ed.jpg' %}" width="10%">
     {% if latest_polls %}
-    <h1 class="white">Latest Polls</h1>
+    <h1>Latest Polls</h1>
     <ul>
         {% for question in latest_polls %}
         <li>
