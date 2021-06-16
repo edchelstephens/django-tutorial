@@ -3,10 +3,15 @@ from django.contrib import admin
 from polls.models.question import Question
 from polls.models.choice import Choice
 
-admin.site.register(Choice)
-
+class ChoiceInLine(admin.TabularInline):
+    model = Choice
+    extra = 3
 
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ["date_published", "name"]
+    fieldsets = [
+        ("Question Information", {"fields": ["name"]}),
+        ("Date Information", {"fields": ["date_published"]})
+    ]
+    inlines = [ ChoiceInLine ]
 
 admin.site.register(Question, QuestionAdmin)
