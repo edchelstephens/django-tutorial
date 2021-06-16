@@ -16,14 +16,15 @@
         {% for choice in question.choices.all %}
         <input 
             type="radio" 
-            name="choice" 
+            name="choice_id" 
             id="choice{{ forloop.counter}}"
             value="{{ choice.id }}"
             >
 
             <label for="choice{{ forloop.counter }}">
-                {{ choice.name }} 
+                <b>{{ choice.name }} </b>
             </label>
+            <span> Votes: {{ choice.votes }}</b>
             <br/>
         {% empty %}
             <h2>No latest polls yet.</h2>
