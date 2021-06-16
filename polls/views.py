@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -58,54 +59,60 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
-class APIView(generic.View):
+class VoteView(generic.View):
     """Sample API View to handle request passed arguments from another view."""
     def post(self, request, from_api=False, data=None, *args, **kwargs):
         try:
+
+            question_id = data.get("question_id")
+            choice_id = data.get("choice_id")
+
+            question = Question.objects.get(id=question_id)
+            choice = question.choices.get(id=choice_id)
+
+            choice.votes = F("votes") + 1
+            choice.save()
+            
+            message = "Poll updated!"
             response = {
-                "data": data
+                "message": message,
+                "question": question.name,
+                "choice": choice.name,
+                "votes": choice.votes
             }
 
             if from_api:
                 return response
             else:
-                return HttpResponse(response)
+                return HttpResponse(message)
+
+        except Question.DoesNotExist:
+            return HttpResponse("Question does not exists!", status=404)
+
+        except Choice.DoesNotExist:
+            return HttpResponse("Choice does not exists!", status=404)
 
         except Exception as exc:
             debug_exception(exc)
             raise exc
 
-class VoteView(generic.View):
+class Votes(generic.View):
     """Class based view for voting"""
     
     def post(self, request, question_id, *args, **kwargs):
         try:
 
-            data = {"question_id": question_id}
+            form_data = request.POST.copy()
+            
+            data = {
+                "question_id": question_id,
+                "choice_id": form_data.get("choice_id")
+            }
 
-            api_view = APIView.as_view()
+            api_view = VoteView.as_view()
             response = api_view(request, from_api=True, data=data)
-
 
             return HttpResponse(response, content_type="application/json")
         except Exception as exc:
             debug_exception(exc)
             return HttpResponse("Error")
-
-def vote_new(request, question_id):
-    """function based voting view"""
-    try:
-
-        data = {
-            "question_id": question_id
-        }
-
-        api_view = APIView.as_view()
-        response = api_view(request)
-
-        return HttpResponse(response, content_type="application/json")
-
-
-    except Exception as exc:
-        debug_exception(exc)
-        return HttpResponse("Error", status=400)
