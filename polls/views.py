@@ -1,6 +1,5 @@
 from django.db.models import F
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -42,23 +41,6 @@ class ResultsView(generic.DetailView):
     template_name = "polls/results.html"
     
 
-def vote(request, question_id):
-    question = get_object_or_404(Question, id=question_id)
-    try:
-        choice = question.choices.get(id=request.POST["choice"])
-    except (KeyError, Choice.DoesNotExist):
-        return render(
-            request, "polls/detail.html", {
-            "question": question,
-            "error_message": "You didn't select a choice."
-        })
-    else:
-        choice.votes += 1
-        choice.save()
-
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
-
-
 class VoteView(generic.View):
     """Sample API View to handle request passed arguments from another view."""
     def post(self, request, from_api=False, data=None, *args, **kwargs):
@@ -73,12 +55,14 @@ class VoteView(generic.View):
             choice.votes = F("votes") + 1
             choice.save()
             
+            choice.refresh_from_db()
             message = "Poll updated!"
             response = {
                 "message": message,
                 "question": question.name,
                 "choice": choice.name,
-                "votes": choice.votes
+                "votes": choice.votes,
+                "success": True
             }
 
             if from_api:
@@ -98,7 +82,8 @@ class VoteView(generic.View):
 
 class Votes(generic.View):
     """Class based view for voting"""
-    
+    redirect = True
+
     def post(self, request, question_id, *args, **kwargs):
         try:
 
@@ -110,9 +95,14 @@ class Votes(generic.View):
             }
 
             api_view = VoteView.as_view()
-            response = api_view(request, from_api=True, data=data)
+            results = api_view(request, from_api=True, data=data)
+            
+            if self.redirect:
+                response = HttpResponseRedirect(reverse("polls:results", args=(question_id,)))
+            else: 
+                response = JsonResponse(data=results)
 
-            return HttpResponse(response, content_type="application/json")
+            return response
         except Exception as exc:
             debug_exception(exc)
             return HttpResponse("Error")
