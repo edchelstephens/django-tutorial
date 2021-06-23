@@ -22,10 +22,10 @@
 * Study notes are in the NOTES directory
 
 
----------------------
-Written with <3 by:
-Edchel Stephen B. Nini
-edchelstephens@gmail.com
-https://pypi.org/user/edchelstephens/
-https://github.com/edchelstephens
-https://www.linkedin.com/in/edchelstephens/
+---------------------  
+Written with <3 by:  
+Edchel Stephen B. Nini  
+edchelstephens@gmail.com  
+https://pypi.org/user/edchelstephens/  
+https://github.com/edchelstephens  
+https://www.linkedin.com/in/edchelstephens/  
