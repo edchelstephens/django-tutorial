@@ -11,5 +11,21 @@
 
 
 ## Progress
+* Done with Django Tutorial 
+* Done Publishing App on test.pypi :  [django-polled-edchelstephens](https://test.pypi.org/project/django-polled-edchelstephens/)
+
 * Last stop:
-    https://docs.djangoproject.com/en/3.1/intro/tutorial02/#activating-models
+    https://docs.djangoproject.com/en/3.2/topics/db/
+
+
+## NOTES
+* Study notes are in the NOTES directory
+
+
+---------------------
+Written with <3 by:
+Edchel Stephen B. Nini
+edchelstephens@gmail.com
+https://pypi.org/user/edchelstephens/
+https://github.com/edchelstephens
+https://www.linkedin.com/in/edchelstephens/
