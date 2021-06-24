@@ -22,6 +22,7 @@ class Employee(models.Model):
 
     # recursive one to Many relationship to self
     # An employee may or may not have a manager(the case for the PRESIDENT)
+    # Every employee except from the President does have a manager
     # A manager can have many employees managed
     manager = models.ForeignKey(
         "self", on_delete=models.SET_NULL,
