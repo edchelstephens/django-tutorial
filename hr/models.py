@@ -21,7 +21,8 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=50)
     manager = models.ForeignKey(
         "self", on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="managed_employees"
     )
 
 
