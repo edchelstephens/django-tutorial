@@ -23,3 +23,19 @@ class Employee(models.Model):
         "self", on_delete=models.SET_NULL,
         null=True
     )
+
+
+    def __repr__(self):
+        return "Employee(id={}, fullname={}, role={}, manager={})".format(
+            self.id,
+            self.fullname,
+            self.role,
+            self.manager
+        )
+
+    def __str__(self):
+        return self.fullname
+
+    @property
+    def fullname(self):
+        return "{} {}".format(self.first_name, self.last_name)
