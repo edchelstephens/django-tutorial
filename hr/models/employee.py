@@ -19,6 +19,10 @@ class Employee(models.Model):
     )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+
+    # recursive one to Many relationship to self
+    # An employee may or may not have a manager(the case for the PRESIDENT)
+    # A manager can have many employees managed
     manager = models.ForeignKey(
         "self", on_delete=models.SET_NULL,
         null=True,
