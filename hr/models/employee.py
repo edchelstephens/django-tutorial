@@ -35,17 +35,17 @@ class Employee(models.Model):
     )
 
 
-    def __repr__(self):
-        return "Employee(id={}, fullname={}, role={}, manager={})".format(
+    def __repr__(self) -> str:
+        return "Employee(id={}, person={}, role={}, manager={})".format(
             self.id,
-            self.fullname,
+            self.person,
             self.role,
             self.manager
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.fullname
 
     @property
-    def fullname(self):
-        return "{} {}".format(self.first_name, self.last_name)
+    def fullname(self) -> str:
+        return self.person.fullname

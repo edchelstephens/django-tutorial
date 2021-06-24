@@ -21,3 +21,7 @@ class Person(models.Model):
 
     def __str__(self) -> str:
         return "{} {}".format(self.first_name, self.last_name)
+
+    @property
+    def fullname(self) -> str:
+        return "{} {}".format(self.first_name, self.last_name)
