@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import manager
+from hr.models.person import Person
 
 class Employee(models.Model):
     """Employee model."""
@@ -17,8 +17,10 @@ class Employee(models.Model):
         choices=EMPLOYEE_ROLES.choices, 
         default=EMPLOYEE_ROLES.STANDARD
     )
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    
+    # One-to-One relationship
+    # One(Employee) is only One(Person)
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True)
 
     # recursive many-to-one relationship to self
     # Many(employees--this Model) to One manager(the foreign key model -- Also an Employee)
