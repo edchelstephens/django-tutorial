@@ -20,7 +20,9 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
-    # recursive one to Many relationship to self
+    # recursive many-to-one relationship to self
+    # Many(employees--this Model) to One manager(the foreign key model -- Also an Employee)
+
     # An employee may or may not have a manager(the case for the PRESIDENT)
     # Every employee except from the President does have a manager
     # A manager can have many employees managed
