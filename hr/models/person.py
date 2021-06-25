@@ -13,10 +13,9 @@ class Person(models.Model):
 
 
     def __repr__(self) -> str:
-        return "Person(id={}, fullname={})".format(
-            self.id,
-            self.first_name,
-            self.last_name
+        return "Person(pk={}, fullname={})".format(
+            self.pk,
+            self.fullname
         )
 
     def __str__(self) -> str:

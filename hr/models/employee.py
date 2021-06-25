@@ -36,9 +36,9 @@ class Employee(models.Model):
 
 
     def __repr__(self) -> str:
-        return "Employee(id={}, person={}, role={}, manager={})".format(
-            self.id,
-            self.person,
+        return "Employee(pk={}, person={}, role={}, manager={})".format(
+            self.pk,
+            repr(self.person),
             self.role,
             self.manager
         )
