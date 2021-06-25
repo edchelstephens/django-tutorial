@@ -49,3 +49,7 @@ class Employee(models.Model):
     @property
     def fullname(self) -> str:
         return self.person.fullname
+
+    @property
+    def gender(self) -> str:
+        return self.person.gender
