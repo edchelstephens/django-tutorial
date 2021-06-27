@@ -75,7 +75,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'polls.apps.PollsConfig',
-    'hr.apps.HrConfig'
+    'hr.apps.HrConfig',
+    'songs.apps.SongsConfig',
 ]
 
 MIDDLEWARE = [
