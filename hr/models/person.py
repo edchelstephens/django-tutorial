@@ -10,6 +10,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=6, choices=Gender.choices, blank=True)
+    friends = models.ManyToManyField("self")
 
 
     def __repr__(self) -> str:
