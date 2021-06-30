@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'hr.apps.HrConfig',
     'songs.apps.SongsConfig',
+    'school.apps.SchoolConfig',
 ]
 
 MIDDLEWARE = [
