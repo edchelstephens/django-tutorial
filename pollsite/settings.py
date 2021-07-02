@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'hr.apps.HrConfig',
     'songs.apps.SongsConfig',
     'school.apps.SchoolConfig',
+    'tutorials.apps.TutorialsConfig',
 ]
 
 MIDDLEWARE = [
