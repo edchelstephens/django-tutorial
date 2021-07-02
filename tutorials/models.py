@@ -8,7 +8,11 @@ from utils.validators.numbers import (
 
 
 class Number(models.Model):
-    """Test Number class for validators."""
+    """Test Number class for validators.
+    
+    NOTE: Validators will only run when used with ModelForm.
+    Not by just calling save.
+    """
 
     number = models.IntegerField(
         validators=[
