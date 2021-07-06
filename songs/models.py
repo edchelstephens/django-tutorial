@@ -32,7 +32,7 @@ class Song(models.Model):
     feat = models.ForeignKey(
         Artist, 
         on_delete=models.SET(get_unkown_artist), 
-        related_name="featured_artist", 
+        related_name="songs_featured", 
         null=True, 
         blank=True
     )   
