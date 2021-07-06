@@ -4,6 +4,7 @@ from django.db.models.deletion import DO_NOTHING, SET_DEFAULT
 class Artist(models.Model):
 
     name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="artist/", blank=True)
 
     def __repr__(self) -> str:
         return "Artist(name={})".format(self.name)
