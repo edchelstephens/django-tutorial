@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models.deletion import DO_NOTHING, SET_DEFAULT
 
@@ -9,11 +11,15 @@ class Artist(models.Model):
     def __repr__(self) -> str:
         return "Artist(name={})".format(self.name)
 
+    def __str__(self) -> str:
+        return self.name
+
 def get_unkown_artist():
     return Artist.objects.get_or_create(name="unkown")
 
 class Album(models.Model):
 
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
     def __repr__(self) -> str:
