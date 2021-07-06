@@ -10,7 +10,7 @@ class ArtistAdmin(admin.ModelAdmin):
 
 class AlbumAdmin(admin.ModelAdmin):
 
-    list_display = ["uuid", "artist"]
+    list_display = ["id", "artist"]
 
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Album, AlbumAdmin)

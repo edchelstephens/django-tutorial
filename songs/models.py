@@ -19,7 +19,6 @@ def get_unkown_artist():
 
 class Album(models.Model):
 
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
     def __repr__(self) -> str:
