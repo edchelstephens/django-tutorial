@@ -36,6 +36,8 @@ class Number(models.Model):
         ]
     )
 
+    characteristics = models.JSONField(default=dict)
+
     def __repr__(self) -> str:
         return "Number(number={}, odd={}, even={})".format(
             self.number,
