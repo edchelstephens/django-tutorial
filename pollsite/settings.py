@@ -156,3 +156,7 @@ STATICFILES_DIRS = [
     ("assets", BASE_DIR / "assets"),
 ]
 
+
+MEDIA_ROOT = "media"
+MEDIA_URL = ""
+
