@@ -72,9 +72,19 @@ class Topping(models.Model):
 
     name = models.CharField(max_length=50)
 
+
+    def __repr__(self) -> str:
+        return "Topping(name={}, pizzas={})".format(
+            self.name,
+            self.get_pizzas(),
+            
+        )
+
     def __str__(self) -> str:
         return self.name
 
+    def get_pizzas(self):
+        return [ str(p) for p in self.pizza_set.all()]
 
 class Pizza(models.Model):
 
@@ -84,5 +94,12 @@ class Pizza(models.Model):
     def __repr__(self) -> str:
         return "Pizza(name={}, toppings={})".format(
             self.name,
-            self.toppings
+            self.get_toppings()
         )
+
+    def __str__(self) -> str:
+        return self.name
+
+
+    def get_toppings(self):
+        return [ t for t in self.toppings.all() ]
