@@ -84,12 +84,12 @@ class Topping(models.Model):
         return self.name
 
     def get_pizzas(self):
-        return [ str(p) for p in self.pizza_set.all()]
+        return [ str(p) for p in self.pizza_topped.all()]
 
 class Pizza(models.Model):
 
     name = models.CharField(max_length=50)
-    toppings = models.ManyToManyField(Topping)
+    toppings = models.ManyToManyField(Topping, related_name="pizza_topped")
 
     def __repr__(self) -> str:
         return "Pizza(name={}, toppings={})".format(
