@@ -44,3 +44,45 @@ class Number(models.Model):
             self.odd,
             self.even
         )
+
+
+class Blog(models.Model):
+
+    name = models.CharField(max_length=50)
+
+    def __repr__(self) -> str:
+        return "Blog(name={})".format(self.name)
+
+
+class Entry(models.Model):
+
+    title = models.CharField(max_length=50)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True, related_name="blog_entries")
+
+
+    def __repr__(self) -> str:
+        return "Entry(title={}, blog={})".format(
+            self.title,
+            repr(self.blog)
+        )
+
+
+
+class Topping(models.Model):
+
+    name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Pizza(models.Model):
+
+    name = models.CharField(max_length=50)
+    toppings = models.ManyToManyField(Topping)
+
+    def __repr__(self) -> str:
+        return "Pizza(name={}, toppings={})".format(
+            self.name,
+            self.toppings
+        )
