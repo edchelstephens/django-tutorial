@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 class Person(models.Model):
@@ -25,3 +26,23 @@ class Person(models.Model):
     @property
     def fullname(self) -> str:
         return "{} {}".format(self.first_name, self.last_name)
+
+
+class Trainee(models.Model):
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    supervisor = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="supervised_trainee"
+    )
+
+    def __repr__(self) -> str:
+        return "Trainee(user={}, supervisor={})".format(
+            self.user,
+            self.supervisor
+        )
