@@ -14,3 +14,12 @@ The most important part of a model – and the only required part of a model –
 
 # class Field
 Field is an abstract class that represents a database table column. Django uses fields to create the database table (db_type()), to map Python types to database(get_prep_value()) and vice-versa(from_db_value()).
+
+In models, a field is instantiated as a class attribute and represents a particular table column. 
+It has attributes such as null and unique, and methods that Django uses to map the field value to database-specific values.
+
+There are three main situations where Django needs to interact with the database backend and fields:
+
+- when it queries the database (Python value -> database backend value)
+- when it loads data from the database (database backend value -> Python value)
+- when it saves to the database (Python value -> database backend value)
