@@ -23,3 +23,9 @@ There are three main situations where Django needs to interact with the database
 - when it queries the database (Python value -> database backend value)
 - when it loads data from the database (database backend value -> Python value)
 - when it saves to the database (Python value -> database backend value)
+
+
+# Relationships  
+Generally, ManyToManyField instances should go in the object that’s going to be edited on a form.  
+In the example of Topping and Pizza, toppings is in Pizza (rather than Topping having a pizzas ManyToManyField ) because it’s more natural to think about a pizza having toppings than a topping being on multiple pizzas. 
+The way it’s set up above, the Pizza form would let users select the toppings.  
