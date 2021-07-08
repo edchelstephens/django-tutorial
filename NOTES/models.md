@@ -11,3 +11,6 @@ Each attribute of the model represents a database field.
 
 # Fields
 The most important part of a model – and the only required part of a model – is the list of database fields it defines. Fields are specified by class attributes. Be careful not to choose field names that conflict with the models API like **clean**, **save**, or **delete**.
+
+# class Field
+Field is an abstract class that represents a database table column. Django uses fields to create the database table (db_type()), to map Python types to database(get_prep_value()) and vice-versa(from_db_value()).
