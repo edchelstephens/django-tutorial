@@ -96,8 +96,8 @@ class Membership(models.Model):
         on_delete=models.CASCADE,
         related_name="group_memberships"
     )
-
-    date_joined = models.DateTimeField(null=True, blank=True)
+    
+    date_joined = models.DateTimeField()
     invite_reason = models.CharField(max_length=120)
 
 
