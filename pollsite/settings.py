@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'songs.apps.SongsConfig',
     'school.apps.SchoolConfig',
     'tutorials.apps.TutorialsConfig',
+    'okr.apps.OkrConfig',
 ]
 
 MIDDLEWARE = [
